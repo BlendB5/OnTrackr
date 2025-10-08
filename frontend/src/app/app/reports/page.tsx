@@ -38,6 +38,7 @@ import {
   AreaChart
 } from 'recharts';
 import { useAuth } from '@/components/auth/auth-provider';
+import { ProtectedRoute } from '@/components/auth/protected-route';
 import { timesheetApi, TimesheetEntry } from '@/services/timesheetApi';
 
 const COLORS = ['#8b5cf6', '#ec4899', '#06b6d4', '#10b981', '#f59e0b', '#ef4444'];
@@ -191,6 +192,7 @@ export default function ReportsPage() {
   };
 
   return (
+    <ProtectedRoute requireAdmin={true}>
     <div className="relative min-h-screen overflow-hidden">
       {/* Main Content */}
       <div className="relative z-20 px-6 py-6">
@@ -559,6 +561,7 @@ export default function ReportsPage() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
 

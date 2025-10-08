@@ -110,7 +110,7 @@ export default function Sidebar({ mobile = false }: SidebarProps) {
               <NavItem href="/app/timesheet" label="Timesheet" Icon={FileText} />
               <NavItem href="/app/schedule" label="Schedule" Icon={CalendarDays} />
               <NavItem href="/app/calendar" label="Calendar" Icon={Calendar} />
-              <NavItem href="/app/reports" label="Reports" Icon={BarChart3} />
+              {user?.role === 'admin' && <NavItem href="/app/reports" label="Reports" Icon={BarChart3} />}
               {user?.role === 'admin' && <NavItem href="/app/admin" label="Admin Panel" Icon={Users} />}
               <NavItem href="/app/settings" label="Settings" Icon={Settings} />
             </nav>
