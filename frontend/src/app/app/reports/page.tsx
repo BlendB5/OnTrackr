@@ -193,7 +193,7 @@ export default function ReportsPage() {
 
   return (
     <ProtectedRoute requireAdmin={true}>
-    <div className="relative min-h-screen overflow-hidden">
+      <div className="relative min-h-screen overflow-hidden">
       {/* Main Content */}
       <div className="relative z-20 px-6 py-6">
         <div className="max-w-7xl mx-auto">
@@ -560,7 +560,7 @@ export default function ReportsPage() {
           </motion.div>
         </div>
       </div>
-    </div>
+      </div>
     </ProtectedRoute>
   );
 }
