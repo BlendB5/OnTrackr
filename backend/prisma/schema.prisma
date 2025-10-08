@@ -1,0 +1,172 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("employee") // roles: "employee", "admin"
+  hourlyRate   Float?   @default(0) // Hourly rate for payroll calculations
+  department   String?  // Department for filtering
+  createdAt    DateTime @default(now())
+
+  // Relations
+  workSessions WorkSession[]
+  breaks       Break[]
+  schedules    Schedule[]
+  events       Event[]
+  tasks        Task[]
+  reminders    Reminder[]
+  timesheets   Timesheet[]
+  adminAdjustments HourAdjustment[] @relation("AdminAdjustments")
+
+  @@map("users")
+}
+
+model WorkSession {
+  id        String   @id @default(uuid())
+  userId    String
+  clockIn   DateTime
+  clockOut  DateTime?
+  totalHours Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  breaks Break[]
+
+  @@map("work_sessions")
+}
+
+model Break {
+  id           String   @id @default(uuid())
+  workSessionId String
+  userId       String
+  breakStart   DateTime
+  breakEnd     DateTime?
+  totalMinutes Int?     // Total break time in minutes
+  breakType    String   @default("break") // "break" or "short_break"
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  WorkSession WorkSession @relation(fields: [workSessionId], references: [id], onDelete: Cascade)
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("breaks")
+}
+
+model Schedule {
+  id          String   @id @default(uuid())
+  userId      String
+  date        DateTime
+  startTime   DateTime
+  endTime     DateTime
+  isWorkingDay Boolean @default(true)
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("schedules")
+}
+
+// Calendar/Event models
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  date        DateTime
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("events")
+}
+
+model Task {
+  id        String   @id @default(uuid())
+  title     String
+  status    String   @default("pending")
+  dueDate   DateTime
+  reminder  DateTime?
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("tasks")
+}
+
+model Reminder {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  scheduled DateTime
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("reminders")
+}
+
+model Timesheet {
+  id            String   @id @default(uuid())
+  userId        String
+  date          DateTime
+  hoursWorked   Float    @default(0)
+  overtimeHours Float    @default(0)
+  regularHours  Float    @default(0)
+  hourlyRate    Float    @default(0)
+  regularPay    Float    @default(0)
+  overtimePay   Float    @default(0)
+  totalPay      Float    @default(0)
+  status        String   @default("pending") // "pending", "approved", "rejected"
+  notes         String?
+  approvedBy    String?  // Admin user ID who approved/rejected
+  approvedAt    DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hourAdjustments HourAdjustment[]
+
+  @@unique([userId, date])
+  @@map("timesheets")
+}
+
+model HourAdjustment {
+  id              String   @id @default(uuid())
+  timesheetId     String
+  adminId         String
+  adjustmentType  String   // "add" or "subtract"
+  hours           Float
+  reason          String
+  previousHours   Float
+  newHours        Float
+  createdAt       DateTime @default(now())
+
+  // Relations
+  Timesheet Timesheet @relation(fields: [timesheetId], references: [id], onDelete: Cascade)
+  Admin User @relation("AdminAdjustments", fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("hour_adjustments")
+}

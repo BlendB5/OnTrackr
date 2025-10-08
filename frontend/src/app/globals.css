@@ -1,0 +1,338 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* React Big Calendar CSS */
+@import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+/* Dark mode styles */
+.dark {
+  color-scheme: dark;
+}
+
+/* Calendar dark mode styles */
+.modern-calendar {
+  background: transparent !important;
+}
+
+.modern-calendar .rbc-header {
+  background: transparent !important;
+  color: rgb(71 85 105) !important;
+  border-bottom: 1px solid rgb(226 232 240) !important;
+  padding: 12px 8px !important;
+  font-weight: 600 !important;
+}
+
+.dark .modern-calendar .rbc-header {
+  color: rgb(226 232 240) !important;
+  border-bottom: 1px solid rgb(51 65 85) !important;
+}
+
+.modern-calendar .rbc-month-view {
+  background: transparent !important;
+}
+
+.modern-calendar .rbc-date-cell {
+  color: rgb(71 85 105) !important;
+  background: transparent !important;
+}
+
+.dark .modern-calendar .rbc-date-cell {
+  color: rgb(226 232 240) !important;
+  background: rgb(30 41 59) !important;
+}
+
+.modern-calendar .rbc-day-bg {
+  background: transparent !important;
+}
+
+.dark .modern-calendar .rbc-day-bg {
+  background: rgb(30 41 59) !important;
+}
+
+.modern-calendar .rbc-day-slot .rbc-events-container {
+  background: transparent !important;
+}
+
+.dark .modern-calendar .rbc-day-slot .rbc-events-container {
+  background: rgb(30 41 59) !important;
+}
+
+.modern-calendar .rbc-today {
+  background: rgb(147 51 234 / 0.1) !important;
+}
+
+.dark .modern-calendar .rbc-today {
+  background: rgb(147 51 234 / 0.2) !important;
+}
+
+.modern-calendar .rbc-today .rbc-date-cell {
+  color: rgb(147 51 234) !important;
+  font-weight: 700 !important;
+}
+
+.dark .modern-calendar .rbc-today .rbc-date-cell {
+  color: rgb(196 181 253) !important;
+  font-weight: 700 !important;
+}
+
+.modern-calendar .rbc-event {
+  background: rgb(147 51 234) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 2px 6px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.modern-calendar .rbc-event-content {
+  color: white !important;
+}
+
+.modern-calendar .rbc-off-range-bg {
+  background: rgb(248 250 252) !important;
+}
+
+.dark .modern-calendar .rbc-off-range-bg {
+  background: rgb(15 23 42) !important;
+}
+
+.modern-calendar .rbc-off-range {
+  color: rgb(148 163 184) !important;
+}
+
+.dark .modern-calendar .rbc-off-range {
+  color: rgb(100 116 139) !important;
+}
+
+/* Calendar grid borders - cleaner styling */
+.modern-calendar .rbc-month-row {
+  border-bottom: 1px solid rgb(226 232 240) !important;
+}
+
+.dark .modern-calendar .rbc-month-row {
+  border-bottom: 1px solid rgb(51 65 85) !important;
+}
+
+.modern-calendar .rbc-date-cell {
+  border-right: 1px solid rgb(226 232 240) !important;
+}
+
+.dark .modern-calendar .rbc-date-cell {
+  border-right: 1px solid rgb(51 65 85) !important;
+}
+
+/* Calendar toolbar - cleaner styling */
+.modern-calendar .rbc-toolbar {
+  background: transparent !important;
+  color: rgb(71 85 105) !important;
+  border-bottom: 1px solid rgb(226 232 240) !important;
+  padding: 12px 0 !important;
+  margin-bottom: 16px !important;
+}
+
+.dark .modern-calendar .rbc-toolbar {
+  color: rgb(226 232 240) !important;
+  border-bottom: 1px solid rgb(51 65 85) !important;
+}
+
+.modern-calendar .rbc-toolbar button {
+  color: rgb(71 85 105) !important;
+  background: transparent !important;
+  border: 1px solid rgb(226 232 240) !important;
+  border-radius: 6px !important;
+  padding: 6px 12px !important;
+  margin: 0 4px !important;
+}
+
+.dark .modern-calendar .rbc-toolbar button {
+  color: rgb(226 232 240) !important;
+  background: rgb(30 41 59) !important;
+  border: 1px solid rgb(51 65 85) !important;
+}
+
+.modern-calendar .rbc-toolbar button:hover {
+  background: rgb(147 51 234 / 0.1) !important;
+  border-color: rgb(147 51 234) !important;
+}
+
+.dark .modern-calendar .rbc-toolbar button:hover {
+  background: rgb(147 51 234 / 0.2) !important;
+  border-color: rgb(147 51 234) !important;
+}
+
+.modern-calendar .rbc-toolbar button.rbc-active {
+  background: rgb(147 51 234) !important;
+  color: white !important;
+  border-color: rgb(147 51 234) !important;
+}
+
+/* Additional clean styling for dark mode */
+.dark .modern-calendar .rbc-month-view {
+  background: rgb(30 41 59) !important;
+  border-radius: 8px !important;
+}
+
+.dark .modern-calendar .rbc-time-view {
+  background: rgb(30 41 59) !important;
+  border-radius: 8px !important;
+}
+
+/* Cleaner event styling */
+.dark .modern-calendar .rbc-event {
+  background: linear-gradient(135deg, rgb(147 51 234), rgb(124 58 237)) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark .modern-calendar .rbc-event:hover {
+  background: linear-gradient(135deg, rgb(124 58 237), rgb(109 40 217)) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+@layer base {
+  :root {
+    /* aiApply-inspired palette */
+    /* Backgrounds & text */
+    --background: 0 0% 100%; /* white */
+    --foreground: 0 0% 16%; /* #2A2A2A */
+
+    /* Surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 16%;
+
+    /* Brand colors */
+    --primary: 221 30% 33%; /* muted navy ~ #3B4A6B */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%; /* soft gray #F5F5F5 */
+    --secondary-foreground: 222.2 20% 20%;
+    --accent: 193 62% 60%; /* subtle teal/cyan ~ #5ABEDC */
+    --accent-foreground: 0 0% 100%;
+
+    /* Status */
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* UI tokens */
+    --muted: 0 0% 94%; /* #E0E0E0 */
+    --muted-foreground: 222 12% 37%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 193 62% 60%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 225 25% 10%;
+    --foreground: 210 40% 98%;
+    --card: 225 25% 12%;
+    --card-foreground: 210 40% 98%;
+    --popover: 225 25% 12%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 221 30% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 20% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 222 20% 18%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 193 62% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 222 20% 22%;
+    --input: 222 20% 22%;
+    --ring: 193 62% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Dark mode enhancements for landing hero and cards */
+.dark .bg-gradient-to-br.from-secondary.via-secondary.to-white {
+  background-image: linear-gradient(to bottom right, hsl(var(--secondary)), hsl(var(--secondary)), hsl(var(--background)));
+}
+
+.dark .card-darkify {
+  @apply bg-card/90 backdrop-blur border-border shadow-lg;
+}
+
+/* Subtle glow accent when in dark mode */
+.dark .glow-accent {
+  box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.6);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.35); }
+  50% { box-shadow: 0 0 24px 4px rgba(139, 92, 246, 0.55); }
+  100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.35); }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Page transitions */
+.fade-enter {
+  opacity: 0.0;
+  transform: translateY(4px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
